@@ -1,0 +1,803 @@
+app:
+  description: '这是一个专业的研究报告生成工作流，集成了多源数据处理、智能分析、结构化写作和自动化文档生成等功能，可适用于各类专业领域的研究报告撰写。
+This is a professional research report generation workflow that integrates multi-source data processing, intelligent analysis, structured writing, and automated document generation, applicable to research report writing in various professional fields.'
+  icon: 🤖
+  icon_background: '#FFEAD5'
+  mode: advanced-chat
+  name: 研究报告
+  use_icon_as_answer_icon: true
+kind: app
+version: 0.1.5
+workflow:
+  conversation_variables: []
+  environment_variables: []
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      allowed_file_types:
+      - image
+      allowed_file_upload_methods:
+      - local_file
+      - remote_url
+      enabled: false
+      fileUploadConfig:
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 15
+        image_file_size_limit: 10
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 3
+    opening_statement: ''
+    retriever_resource:
+      enabled: false
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        isInIteration: false
+        sourceType: iteration
+        targetType: code
+      id: 1733847779842-source-1733848066407-target
+      source: '1733847779842'
+      sourceHandle: source
+      target: '1733848066407'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: code
+        targetType: answer
+      id: 1733848066407-source-1733848125173-target
+      source: '1733848066407'
+      sourceHandle: source
+      target: '1733848125173'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: parameter-extractor
+        targetType: iteration
+      id: 1733899915108-source-1733847779842-target
+      source: '1733899915108'
+      sourceHandle: source
+      target: '1733847779842'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: knowledge-retrieval
+        targetType: llm
+      id: 1733907502796-source-llm-target
+      source: '1733907502796'
+      sourceHandle: source
+      target: llm
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: document-extractor
+        targetType: llm
+      id: 1733915888615-source-llm-target
+      source: '1733915888615'
+      sourceHandle: source
+      target: llm
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: start
+        targetType: knowledge-retrieval
+      id: 1733561456673-source-1733907502796-target
+      source: '1733561456673'
+      sourceHandle: source
+      target: '1733907502796'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: start
+        targetType: if-else
+      id: 1733561456673-source-1735739615086-target
+      source: '1733561456673'
+      sourceHandle: source
+      target: '1735739615086'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: if-else
+        targetType: document-extractor
+      id: 1735739615086-true-1733915888615-target
+      source: '1735739615086'
+      sourceHandle: 'true'
+      target: '1733915888615'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: true
+        iteration_id: '1733847779842'
+        sourceType: iteration-start
+        targetType: knowledge-retrieval
+      id: 1733847779842start-source-1736044525304-target
+      source: 1733847779842start
+      sourceHandle: source
+      target: '1736044525304'
+      targetHandle: target
+      type: custom
+      zIndex: 1002
+    - data:
+        isInIteration: true
+        iteration_id: '1733847779842'
+        sourceType: knowledge-retrieval
+        targetType: llm
+      id: 1736044525304-source-1733847816395-target
+      source: '1736044525304'
+      sourceHandle: source
+      target: '1733847816395'
+      targetHandle: target
+      type: custom
+      zIndex: 1002
+    - data:
+        isInIteration: false
+        sourceType: answer
+        targetType: tool
+      id: 1733848125173-source-17338441076080-target
+      source: '1733848125173'
+      sourceHandle: source
+      target: '17338441076080'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: llm
+        targetType: llm
+      id: llm-source-1736058861125-target
+      source: llm
+      sourceHandle: source
+      target: '1736058861125'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: llm
+        targetType: parameter-extractor
+      id: 1736058861125-source-1733899915108-target
+      source: '1736058861125'
+      sourceHandle: source
+      target: '1733899915108'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    nodes:
+    - data:
+        desc: ''
+        selected: false
+        title: 开始
+        type: start
+        variables:
+        - label: 事件概述
+          max_length: 100000
+          options: []
+          required: true
+          type: paragraph
+          variable: gaishu
+        - label: 故事标题
+          max_length: 100
+          options: []
+          required: true
+          type: text-input
+          variable: biaoti
+        - label: 写作风格
+          max_length: 500
+          options: []
+          required: true
+          type: paragraph
+          variable: xiezuofengge
+        - label: 最少字数
+          max_length: 48
+          options: []
+          required: true
+          type: number
+          variable: zuixiaozishu
+        - label: 最大字数
+          max_length: 48
+          options: []
+          required: true
+          type: number
+          variable: zuidazishu
+        - allowed_file_extensions: []
+          allowed_file_types:
+          - document
+          allowed_file_upload_methods:
+          - local_file
+          - remote_url
+          label: 文本素材
+          max_length: 5
+          options: []
+          required: false
+          type: file-list
+          variable: sucai
+      height: 218
+      id: '1733561456673'
+      position:
+        x: 30
+        y: 317
+      positionAbsolute:
+        x: 30
+        y: 317
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 243
+    - data:
+        context:
+          enabled: true
+          variable_selector:
+          - '1733907502796'
+          - result
+        desc: ''
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: deepseek-chat
+          provider: deepseek
+        prompt_template:
+        - edition_type: basic
+          id: aed80e57-adc9-4160-acac-a69e622b3191
+          jinja2_text: " <instruction> \n你需要根据提供的标题和大纲写一篇长文。按照以下步骤完成任务： \n1. 使用{{#1733561456673.biaoti#}}作为文章标题。\
+            \ \n2. 根据提供的如下需求写作：\n内容概述{{#1733561456673.gaishu#}}\n写作风格{{#1733561456673.xiezuofengge#}}\n\
+            写作类型{{#1733561456673.wenzhangleixing#}}\n{{#1733915888615.text#}}\n{{#context#}}\n\
+            大纲中的每个部分应对应文章中的一个部分。 \n3. 确保文章内容详实，每个部分都包含详细的信息、解释、例子以及任何其他相关内容，以充分涵盖主题。\
+            \ \n4. 确保各部分之间的过渡顺畅，保持连贯的流畅性。 \n5. 输出应不包含任何XML标签。仅提供包含以下键和值的JSON数组：“section”（文章每个部分的标题），“bullets”（每个部分的提纲）。\
+            \ \n<example> \n<input> \n<article_title> \n气候变化对沿海城市的影响 \n</article_title>\
+            \ \n<article_outline> \n1. 引言 \n2. 海平面上升 \n3. 风暴频率增加 \n4. 结论 \n</article_outline>\
+            \ \n</input> \n<output> \n[ { \"section\": \"引言\", \"bullets\": \"1. 气候变化对沿海城市影响的概述\
+            \ 2. 理解这些影响的重要性\" }, { \"section\": \"海平面上升\", \"bullets\": \"1. 海平面上升的原因\
+            \ 2. 对沿海基础设施和社区的影响 3. 受影响城市的例子\" }, { \"section\": \"风暴频率增加\", \"bullets\"\
+            : \"1. 气候变化与风暴频率的关联 2. 更频繁和严重的风暴对沿海地区的影响 3. 最近风暴的案例研究\" }, { \"section\"\
+            : \"结论\", \"bullets\": \"1. 关键点总结 2. 应对气候变化的紧迫性 3. 对政策制定者和社区的行动呼吁\" }\
+            \ ] \n</output> \n</example> \n</instruction> \n<input> \n<article_title>\
+            \ \n{{#1733561456673.biaoti#}}\n</article_title>\n<article_outline> \n\
+            {{#1733561456673.gaishu#}} \n</article_outline> \n</input> \n<output>\n"
+          role: system
+          text: " <instruction> \n你需要根据提供的标题和大纲写一篇深度研究报告。按照以下步骤完成任务： \n1. 使用{{#1733561456673.biaoti#}}作为文章标题。\
+            \ \n2. 根据提供的如下需求写作：\n内容概述{{#1733561456673.gaishu#}}\n写作风格{{#1733561456673.xiezuofengge#}}\n\
+            \n{{#context#}}\n大纲中的每个部分应对应文章中的一个部分。 \n3. 确保文章内容详实，每个部分都包含详细的信息、解释、例子以及任何其他相关内容，以充分涵盖主题。\
+            \ \n4. 确保各部分之间的过渡顺畅，保持连贯的流畅性。 \n5. 输出应不包含任何XML标签。仅提供包含以下键和值的JSON数组：“section”（文章每个部分的标题），“bullets”（每个部分的提纲）。\
+            \ \n<example> \n<input> \n<article_title> \n气候变化对沿海城市的影响 \n</article_title>\
+            \ \n<article_outline> \n1. 引言 \n2. 海平面上升 \n3. 风暴频率增加 \n4. 结论 \n</article_outline>\
+            \ \n</input> \n<output> \n[ { \"section\": \"引言\", \"bullets\": \"1. 气候变化对沿海城市影响的概述\
+            \ 2. 理解这些影响的重要性\" }, { \"section\": \"海平面上升\", \"bullets\": \"1. 海平面上升的原因\
+            \ 2. 对沿海基础设施和社区的影响 3. 受影响城市的例子\" }, { \"section\": \"风暴频率增加\", \"bullets\"\
+            : \"1. 气候变化与风暴频率的关联 2. 更频繁和严重的风暴对沿海地区的影响 3. 最近风暴的案例研究\" }, { \"section\"\
+            : \"结论\", \"bullets\": \"1. 关键点总结 2. 应对气候变化的紧迫性 3. 对政策制定者和社区的行动呼吁\" }\
+            \ ] \n</output> \n</example> \n</instruction> \n<output>\n"
+        selected: false
+        title: 生成段落标题和段落内容
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 96
+      id: llm
+      position:
+        x: 939
+        y: 317
+      positionAbsolute:
+        x: 939
+        y: 317
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 243
+    - data:
+        desc: ''
+        provider_id: feishu_document
+        provider_name: feishu_document
+        provider_type: builtin
+        selected: false
+        title: 创建飞书文档 (1)
+        tool_configurations: {}
+        tool_label: 创建飞书文档
+        tool_name: create_document
+        tool_parameters:
+          content:
+            type: mixed
+            value: '# 标题
+
+              {{#1733561456673.biaoti#}}
+
+              # 用户的概述内容
+
+              {{#1733561456673.gaishu#}}
+
+              # 大模型的提炼
+
+              {{#llm.text#}}
+
+              # LLM大模型的结构
+
+              {{#1733899915108.__reason#}}
+
+              # LLM大模型的结果
+
+              {{#1733848066407.result#}}'
+          folder_token:
+            type: mixed
+            value: https://cozeai99.feishu.cn/drive/folder/（yourid）
+          title:
+            type: mixed
+            value: '{{#1733561456673.biaoti#}}'
+        type: tool
+      height: 52
+      id: '17338441076080'
+      position:
+        x: 3200
+        y: 317
+      positionAbsolute:
+        x: 3200
+        y: 317
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 243
+    - data:
+        desc: ''
+        error_handle_mode: terminated
+        height: 234
+        is_parallel: false
+        iterator_selector:
+        - '1733899915108'
+        - result
+        output_selector:
+        - '1733847816395'
+        - text
+        output_type: array[string]
+        parallel_nums: 10
+        selected: false
+        start_node_id: 1733847779842start
+        title: 迭代
+        type: iteration
+        width: 685.7991965725148
+      height: 234
+      id: '1733847779842'
+      position:
+        x: 1848
+        y: 317
+      positionAbsolute:
+        x: 1848
+        y: 317
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 686
+      zIndex: 1
+    - data:
+        desc: ''
+        isInIteration: true
+        selected: false
+        title: ''
+        type: iteration-start
+      draggable: false
+      height: 48
+      id: 1733847779842start
+      parentId: '1733847779842'
+      position:
+        x: 24
+        y: 68
+      positionAbsolute:
+        x: 1872
+        y: 385
+      selectable: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom-iteration-start
+      width: 44
+      zIndex: 1002
+    - data:
+        context:
+          enabled: true
+          variable_selector:
+          - '1736044525304'
+          - result
+        desc: ''
+        isInIteration: true
+        iteration_id: '1733847779842'
+        memory:
+          query_prompt_template: ''
+          role_prefix:
+            assistant: ''
+            user: ''
+          window:
+            enabled: false
+            size: 50
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: deepseek-chat
+          provider: deepseek
+        prompt_template:
+        - id: 81c10924-abab-4ecc-8a0f-443d850b2390
+          role: system
+          text: '请撰写一篇标题为{{#1733561456673.biaoti#}}的深度调研分析报告，要求的写作风格为{{#1733561456673.xiezuofengge#}}.
+
+            {{#context#}}
+
+            确保每个段落不少于{{#1733561456673.zuixiaozishu#}}字，不多于{{#1733561456673.zuidazishu#}}字。
+
+            段落需完整表达一个主题，不得偷懒或模糊处理。
+
+            '
+        - id: b462c1d6-88bf-4347-9bbb-375a857e07c5
+          role: user
+          text: "You are writing a document called {{#1733561456673.biaoti#}}. Write\
+            \ a section based on the following information: {{#1733847779842.item#}}.\
+            \  \n\n\n<Full outline>\nTake the full outline as a reference when generating\
+            \ full article. \n{{#llm.text#}}"
+        selected: false
+        title: LLM 4
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 96
+      id: '1733847816395'
+      parentId: '1733847779842'
+      position:
+        x: 427
+        y: 65
+      positionAbsolute:
+        x: 2275
+        y: 382
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 243
+      zIndex: 1002
+    - data:
+        code: "\ndef main(articleSections: list):\n    data = articleSections\n  \
+          \  return {\n        \"result\": \"\\n\".join(data)\n    }\n"
+        code_language: python3
+        desc: ''
+        outputs:
+          result:
+            children: null
+            type: string
+        selected: true
+        title: 代码执行 2
+        type: code
+        variables:
+        - value_selector:
+          - '1733847779842'
+          - output
+          variable: articleSections
+      height: 52
+      id: '1733848066407'
+      position:
+        x: 2594
+        y: 317
+      positionAbsolute:
+        x: 2594
+        y: 317
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 243
+    - data:
+        answer: '{{#1733848066407.result#}}'
+        desc: ''
+        selected: false
+        title: 直接回复 2
+        type: answer
+        variables: []
+      height: 101
+      id: '1733848125173'
+      position:
+        x: 2897
+        y: 317
+      positionAbsolute:
+        x: 2897
+        y: 317
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 243
+    - data:
+        desc: ''
+        instruction: " <instruction> \n请撰写一篇深度调研分析报告。按照以下步骤完成任务：\n使用提供的标题 {{#1733561456673.biaoti#}}\
+          \ 作为文章的标题。\n根据提供的大纲 {{#1733561456673.gaishu#}} 和 {{#llm.text#}} 组织文章。大纲中的每个部分应对应文章中的一个部分。\n\
+          确保文章内容详实，每个部分都包含详细的信息、解释、例子及任何其他相关内容，以充分涵盖主题。\n增加事实性证据和关键数据，确保信息来源和引用合适。\n\
+          最后生成一个包含所有信息来源和引用的markdown表格，包括来源、地址或人物清单。\n输出应不包含任何XML标签。仅提供一个包含以下键和值的JSON数组：“section”（文章每个部分的标题），“bullets”（每个部分的提纲）。\n\
+          <example> \n<input> \n<article_title> \n气候变化对沿海城市的影响 \n</article_title>\
+          \ \n<article_outline> \n1. 引言 \n2. 海平面上升 \n3. 风暴频率增加 \n4. 结论 \n</article_outline>\
+          \ \n</input> \n<output> \n[ { \"section\": \"引言\", \"bullets\": \"1. 气候变化对沿海城市影响的概述\
+          \ 2. 理解这些影响的重要性\" }, { \"section\": \"海平面上升\", \"bullets\": \"1. 海平面上升的原因\
+          \ 2. 对沿海基础设施和社区的影响 3. 受影响城市的例子\" }, { \"section\": \"风暴频率增加\", \"bullets\"\
+          : \"1. 气候变化与风暴频率的关联 2. 更频繁和严重的风暴对沿海地区的影响 3. 最近风暴的案例研究\" }, { \"section\"\
+          : \"结论\", \"bullets\": \"1. 关键点总结 2. 应对气候变化的紧迫性 3. 对政策制定者和社区的行动呼吁\" } ]\
+          \ \n</output> \n</example> \n</instruction> \n<input> \n<article_title>\
+          \ \n{{#1733561456673.biaoti#}}\n</article_title>\n<article_outline> \n{{#1733561456673.gaishu#}}\
+          \ {{#llm.text#}}\n</article_outline> \n</input> \n<output>\n"
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: deepseek-coder
+          provider: deepseek
+        parameters:
+        - description: 提取内容
+          name: result
+          required: false
+          type: array[object]
+        query:
+        - '1736058861125'
+        - text
+        reasoning_mode: function_call
+        selected: false
+        title: 参数提取器
+        type: parameter-extractor
+        variables: []
+        vision:
+          enabled: false
+      height: 96
+      id: '1733899915108'
+      position:
+        x: 1545
+        y: 317
+      positionAbsolute:
+        x: 1545
+        y: 317
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 243
+    - data:
+        dataset_ids:
+        - abc9b343-e643-4cdb-8fce-59560c5190c2
+        - 66260146-48ef-440d-bf77-e8c2d67951dc
+        - ac8a824b-2919-467b-9a9c-98ca70543fbc
+        - 9adb1098-d33f-49c7-aed6-2456c3bb30f1
+        desc: ''
+        multiple_retrieval_config:
+          reranking_enable: true
+          reranking_mode: reranking_model
+          reranking_model:
+            model: gte-rerank
+            provider: tongyi
+          score_threshold: null
+          top_k: 4
+          weights:
+            keyword_setting:
+              keyword_weight: 0
+            vector_setting:
+              embedding_model_name: text-embedding-ada-002
+              embedding_provider_name: openai
+              vector_weight: 1
+        query_variable_selector:
+        - '1733561456673'
+        - gaishu
+        retrieval_mode: multiple
+        selected: false
+        title: 知识检索
+        type: knowledge-retrieval
+      height: 174
+      id: '1733907502796'
+      position:
+        x: 636
+        y: 317
+      positionAbsolute:
+        x: 636
+        y: 317
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 243
+    - data:
+        desc: ''
+        is_array_file: true
+        selected: false
+        title: 文档提取器
+        type: document-extractor
+        variable_selector:
+        - '1733561456673'
+        - sucai
+      height: 90
+      id: '1733915888615'
+      position:
+        x: 636
+        y: 531
+      positionAbsolute:
+        x: 636
+        y: 531
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 243
+    - data:
+        author: NengBank
+        desc: ''
+        height: 244
+        selected: false
+        showAuthor: true
+        text: '{"root":{"children":[{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"写作概述","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"标题","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"写作类型","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"写作风格","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"字数限制","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"素材上传","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0}],"direction":"ltr","format":"","indent":0,"type":"root","version":1}}'
+        theme: blue
+        title: ''
+        type: ''
+        width: 240
+      height: 244
+      id: '1734444405058'
+      position:
+        x: 27.323866873871783
+        y: 599.686525482674
+      positionAbsolute:
+        x: 27.323866873871783
+        y: 599.686525482674
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom-note
+      width: 240
+    - data:
+        cases:
+        - case_id: 'true'
+          conditions:
+          - comparison_operator: not empty
+            id: b372808b-8c7c-4403-8c95-a0aca8f65373
+            value: ''
+            varType: array[file]
+            variable_selector:
+            - '1733561456673'
+            - sucai
+          id: 'true'
+          logical_operator: and
+        desc: ''
+        selected: false
+        title: 条件分支 2
+        type: if-else
+      height: 124
+      id: '1735739615086'
+      position:
+        x: 333
+        y: 489
+      positionAbsolute:
+        x: 333
+        y: 489
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 243
+    - data:
+        dataset_ids:
+        - ac8a824b-2919-467b-9a9c-98ca70543fbc
+        - abc9b343-e643-4cdb-8fce-59560c5190c2
+        - 66260146-48ef-440d-bf77-e8c2d67951dc
+        desc: ''
+        isInIteration: true
+        iteration_id: '1733847779842'
+        multiple_retrieval_config:
+          reranking_enable: true
+          reranking_mode: reranking_model
+          reranking_model:
+            model: gte-rerank
+            provider: tongyi
+          score_threshold: 0.8
+          top_k: 4
+        query_variable_selector:
+        - '1733561456673'
+        - sys.query
+        retrieval_mode: multiple
+        selected: false
+        title: 知识检索 2
+        type: knowledge-retrieval
+      height: 146
+      id: '1736044525304'
+      parentId: '1733847779842'
+      position:
+        x: 127.2991965725148
+        y: 68
+      positionAbsolute:
+        x: 1975.2991965725148
+        y: 385
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 243
+      zIndex: 1002
+    - data:
+        context:
+          enabled: true
+          variable_selector:
+          - llm
+          - text
+        desc: ''
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: gpt-4o
+          provider: openai
+        prompt_template:
+        - id: cab800a9-9011-4043-adf0-bf4c8000c046
+          role: system
+          text: '对提供的素材{{#context#}}进一步分析加工
+
+            确保：
+
+            结构分析：理解要点间关系，规划论述顺序
+
+            内容生成：基于结构创建逻辑更完整段落
+
+            内容优化：确保质量和一致性'
+        - id: d1243177-3548-4624-a2b1-afbdb10a94d0
+          role: user
+          text: ''
+        selected: false
+        title: LLM 3
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 96
+      id: '1736058861125'
+      position:
+        x: 1242
+        y: 317
+      positionAbsolute:
+        x: 1242
+        y: 317
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 243
+    viewport:
+      x: -696.0000000000002
+      y: -29
+      zoom: 0.7
